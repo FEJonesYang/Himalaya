@@ -1,49 +1,69 @@
 package com.example.himalaya;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.util.Log;
 
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
-import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
-import com.ximalaya.ting.android.opensdk.model.category.Category;
-import com.ximalaya.ting.android.opensdk.model.category.CategoryList;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import com.example.himalaya.adapters.IndicatorAdapter;
+import com.example.himalaya.adapters.MainContentAdapter;
 
-public class MainActivity extends AppCompatActivity {
+
+import net.lucode.hackware.magicindicator.MagicIndicator;
+import net.lucode.hackware.magicindicator.ViewPagerHelper;
+import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
+
+
+public class MainActivity extends FragmentActivity {
 
     private static final String TAG = "MainActivity";
+    private MagicIndicator magicIndicator;
+    private ViewPager viewPager;
+    private IndicatorAdapter indicatorAdapter;
+    private FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initView();
+        initEvent();
+    }
 
-        Map<String, String> map = new HashMap<String, String>();
-        CommonRequest.getCategories(map, new IDataCallBack<CategoryList>() {
+    /**
+     *  table 栏的点击事件
+     * */
+    private void initEvent() {
+        indicatorAdapter.setOnIndicatorTapClickListener(new IndicatorAdapter.onIndicatorTapClickListener() {
             @Override
-            public void onSuccess(CategoryList categoryList) {
-                List<Category> categories = categoryList.getCategories();
-                if (categories != null) {
-                    int size = categories.size();
-                    Log.d(TAG, "categories size --> " + size);
-                    for (Category category : categories) {
-                        Log.d(TAG, "category code -->" + category.getCategoryName());
-                    }
-                }
-
-            }
-
-            @Override
-            public void onError(int i, String s) {
-                Log.d(TAG, "error code --> " + i + ",error messages -->" + s);
+            public void onTapClick(int index) {
+                viewPager.setCurrentItem(index);
             }
         });
+    }
+
+    private void initView() {
+        magicIndicator = findViewById(R.id.magic_indicator);
+        magicIndicator.setBackgroundColor(this.getResources().getColor(R.color.main_color));
+
+        //ViewPager
+        viewPager = findViewById(R.id.content_pager);
+
+        //创建内容适配器
+        manager = getSupportFragmentManager();
+        MainContentAdapter mainContentAdapter = new MainContentAdapter(manager);
+        viewPager.setAdapter(mainContentAdapter);
+
+        //创建indicator的适配器，由于点击事件需要把 indicatorAdapter 提升成类变量
+        indicatorAdapter = new IndicatorAdapter(this);
+        CommonNavigator commonNavigator = new CommonNavigator(this);
+        commonNavigator.setAdjustMode(true);
+        commonNavigator.setAdapter(indicatorAdapter);
+
+        //把ViewPager和indicator绑定到一起
+        magicIndicator.setNavigator(commonNavigator);
+        ViewPagerHelper.bind(magicIndicator, viewPager);
     }
 }
