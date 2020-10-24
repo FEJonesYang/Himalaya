@@ -41,5 +41,6 @@ dependencies {
     implementation("com.squareup.okio:okio:2.9.0")
     implementation files('libs/xutil3.3.6.jar')
     implementation 'com.github.hackware1993:MagicIndicator:1.6.0' // for support lib
-    implementation 'com.github.hackware1993:MagicIndicator:1.7.0' // for androidx
+    implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'// for androidx
 }

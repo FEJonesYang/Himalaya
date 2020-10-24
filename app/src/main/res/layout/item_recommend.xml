@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/shape_album_item_bg"
+    android:layout_width="match_parent"
+    android:layout_height="75dp">
+
+    <!--左侧的图片显示-->
+    <com.example.himalaya.views.RoundRectImageView
+        android:id="@+id/album_cover"
+        android:layout_width="68dp"
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"
+        android:scaleType="fitXY" />
+
+    <!--右侧展示信息，线性布局，方向：垂直-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_toRightOf="@id/album_cover"
+        android:orientation="vertical">
+
+        <!--显示标题-->
+        <TextView
+            android:id="@+id/album_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="按斯科拉里离开你斯科拉里了历史看按斯科拉里离开你斯科拉里了历史看"
+            android:textSize="18sp" />
+
+        <!--显示描述-->
+        <TextView
+            android:id="@+id/album_description_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:ellipsize="end"
+            android:lines="1"
+            android:text="按斯科拉里离开你斯科拉里了历史看按斯科拉里离开你斯科拉里了历史看"
+            android:textColor="#FF848484"
+            android:textSize="12sp" />
+
+        <!--下面播放量、集数 的整个布局；方向：水平-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <!--播放量-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/play" />
+
+                <TextView
+                    android:id="@+id/album_play_count"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="233万"
+                    android:textColor="#FF848484"
+                    android:textSize="7sp" />
+
+            </LinearLayout>
+
+            <!--集数-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/sound" />
+
+                <TextView
+                    android:id="@+id/album_content_size"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="2dp"
+                    android:text="23集"
+                    android:textColor="#FF848484"
+                    android:textSize="7sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</RelativeLayout>

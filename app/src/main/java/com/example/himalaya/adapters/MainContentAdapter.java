@@ -10,12 +10,9 @@ import com.example.himalaya.utils.FragmentCreator;
 /**
  * @author JonesYang
  * @Data 2020-10-17
- * @Function  ViewPager 的适配器
+ * @Function  ViewPager + Fragment 的适配器
  */
 public class MainContentAdapter extends FragmentPagerAdapter {
-    public MainContentAdapter(@NonNull FragmentManager fm, int behavior) {
-        super(fm, behavior);
-    }
 
     public MainContentAdapter(FragmentManager manager) {
         super(manager);
@@ -24,11 +21,13 @@ public class MainContentAdapter extends FragmentPagerAdapter {
     @NonNull
     @Override
     public Fragment getItem(int position) {
+        //返回 Fragment
         return FragmentCreator.getFragment(position);
     }
 
     @Override
     public int getCount() {
+        //返回 Fragment 的数量
         return FragmentCreator.PAGE_COUNT;
     }
 }

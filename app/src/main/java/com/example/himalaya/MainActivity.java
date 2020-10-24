@@ -39,6 +39,9 @@ public class MainActivity extends FragmentActivity {
         indicatorAdapter.setOnIndicatorTapClickListener(new IndicatorAdapter.onIndicatorTapClickListener() {
             @Override
             public void onTapClick(int index) {
+                //始终都需要调用 viewPager.setCurrentItem(index); ，如何在 Activity 获取 index？
+                //这时候就需要把 IndicatorAdapter 适配器里面的 index 传过来，这时候可以在 IndicatorAdapter 设置
+                //接口进行回调，这就是面向接口编程
                 viewPager.setCurrentItem(index);
             }
         });

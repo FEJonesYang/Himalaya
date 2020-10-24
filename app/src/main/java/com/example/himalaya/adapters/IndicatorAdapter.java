@@ -16,7 +16,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.Simple
 /**
  * @author JonesYang
  * @Data 2020-10-12
- * @Function viewpager的适配器
+ * @Function 导航栏的适配器
  */
 public class IndicatorAdapter extends CommonNavigatorAdapter {
 
@@ -26,6 +26,7 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
     public onIndicatorTapClickListener onIndicatorTapClickListener;
 
     public IndicatorAdapter(Context context) {
+        //把标题放入定义的 mTitles 数组里
         mTitles = context.getResources().getStringArray(R.array.indicator_title);
     }
 
@@ -51,7 +52,6 @@ public class IndicatorAdapter extends CommonNavigatorAdapter {
         simplePagerTitleView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO
                 //如果事件监听不为空
                 if (onIndicatorTapClickListener != null) {
                     onIndicatorTapClickListener.onTapClick(index);

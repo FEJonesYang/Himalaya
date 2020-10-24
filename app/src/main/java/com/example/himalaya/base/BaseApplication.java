@@ -1,10 +1,12 @@
 package com.example.himalaya.base;
 
 import android.app.Application;
+import android.os.Handler;
 
 import com.example.himalaya.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
+
 
 /**
  * @author JonesYang
@@ -12,6 +14,9 @@ import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
  * @Function
  */
 public class BaseApplication extends Application {
+
+    private static Handler mHandler= null;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -30,5 +35,10 @@ public class BaseApplication extends Application {
 
         LogUtil.init(this.getPackageName(), false);
 
+        mHandler = new Handler();
+    }
+
+    public static Handler getHandler(){
+        return mHandler;
     }
 }
