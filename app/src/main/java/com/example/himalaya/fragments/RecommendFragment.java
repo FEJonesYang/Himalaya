@@ -1,5 +1,6 @@
 package com.example.himalaya.fragments;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.example.himalaya.R;
 import com.example.himalaya.adapters.RecommendListAdapter;
 import com.example.himalaya.base.BaseFragment;
 import com.example.himalaya.interfaces.IRecommendViewCallBack;
+import com.example.himalaya.presenters.AlbumDetailPresenter;
 import com.example.himalaya.presenters.RecommendPresenter;
 
 import com.example.himalaya.utils.LogUtil;
@@ -28,7 +30,7 @@ import java.util.List;
  * @Data 2020-10-17
  * @Function 推荐列表的 Fragment
  */
-public class RecommendFragment extends BaseFragment implements IRecommendViewCallBack, UILoader.OnRetryClickListener {
+public class RecommendFragment extends BaseFragment implements IRecommendViewCallBack, UILoader.OnRetryClickListener, RecommendListAdapter.OnItemViewClickListener {
 
     public static final String TAG = "RecommendFragment";
     private View view;
@@ -58,7 +60,6 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         if (uiLoader.getParent() instanceof ViewGroup) {
             ((ViewGroup) uiLoader.getParent()).removeView(uiLoader);
         }
-
         uiLoader.setOnRetryClickListener(this);
 
         //返回View
@@ -97,6 +98,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
 
         //3、设置适配器
         recommendListAdapter = new RecommendListAdapter();
+        //注册单个 item 的点击事件
+        recommendListAdapter.setOnItemViewClickListener(this);
         recommendRecyclerView.setAdapter(recommendListAdapter);
 
         return view;
@@ -148,5 +151,17 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         if (recommendPresenter != null) {
             recommendPresenter.getRecommendList();
         }
+    }
+
+    /**
+     * 单个 item 被点击
+     */
+    @Override
+    public void itemViewClickListener(int position, Album album) {
+        //这边有数据
+        AlbumDetailPresenter.getAlbumDetailPresenter().setTargetAlbum(album);
+        Intent intent = new Intent();
+        intent.setAction("com.example.himalaya.DetailActivity");
+        startActivity(intent);
     }
 }

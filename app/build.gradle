@@ -18,7 +18,7 @@ android {
         }
     }
     sourceSets {
-        main{
+        main {
             jniLibs.srcDirs = ['libs']
         }
     }
@@ -43,4 +43,5 @@ dependencies {
     implementation 'com.github.hackware1993:MagicIndicator:1.6.0' // for support lib
     implementation 'com.github.hackware1993:MagicIndicator:1.7.0'
     implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha06'// for androidx
+    implementation 'com.squareup.picasso:picasso:2.71828'
 }

@@ -13,7 +13,7 @@ import com.example.himalaya.R;
 /**
  * @author JonesYang
  * @Data 2020-10-25
- * @Function
+ * @Function 拉去数据时，不断加载
  */
 @SuppressLint("AppCompatCustomView")
 public class LoadingView extends ImageView {

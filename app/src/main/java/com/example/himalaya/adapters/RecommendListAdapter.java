@@ -25,6 +25,8 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
 
     //接收数据的集合
     private List<Album> mData = new ArrayList<>();
+    //点击单个 View 事件的接口成员
+    private OnItemViewClickListener onItemViewClickListener;
 
     //构造函数，接受获取到的数据
     public RecommendListAdapter() {
@@ -41,9 +43,18 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
 
     // onBindViewHolder 是把数据交给对应的 InnerHolder 来显示。
     @Override
-    public void onBindViewHolder(@NonNull InnerHolder holder, int position) {
+    public void onBindViewHolder(@NonNull InnerHolder holder, final int position) {
         //绑定数据
         holder.itemView.setTag(position);
+        //点击事件，点击单个的 itemView，跳转到详情界面
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemViewClickListener != null) {
+                    onItemViewClickListener.itemViewClickListener(position, mData.get(position));
+                }
+            }
+        });
         holder.setData(mData.get(position));
     }
 
@@ -94,5 +105,17 @@ public class RecommendListAdapter extends RecyclerView.Adapter<RecommendListAdap
             Glide.with(itemView.getContext()).load(album.getCoverUrlLarge()).into(albumCoverIv);
 
         }
+    }
+
+
+    /**
+     * 点击单个 View 事件的接口
+     */
+    public void setOnItemViewClickListener(OnItemViewClickListener onItemViewClickListener) {
+        this.onItemViewClickListener = onItemViewClickListener;
+    }
+
+    public interface OnItemViewClickListener {
+        void itemViewClickListener(int position, Album album);
     }
 }
