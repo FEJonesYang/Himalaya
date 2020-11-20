@@ -21,7 +21,7 @@
         <activity android:name=".DetailActivity">
             <intent-filter>
                 <category android:name="android.intent.category.DEFAULT" />
-                <action android:name="com.example.himalaya.DetailActivity"/>
+                <action android:name="com.example.himalaya.DetailActivity" />
             </intent-filter>
         </activity>
         <activity android:name=".MainActivity">
